@@ -1,0 +1,56 @@
+/* set defult font of page */
+*{font-family: 'Vazirmatn', sans-serif;}
+/* body color setter */
+body{background: linear-gradient(to right, #56ab2f , #a8e063);}
+/* all cards color setter */
+.card{background: linear-gradient(to right, #02aab0  , #00cdac);}
+
+/* ***PAGE HIDDER*** */
+.dataPage,.configPage{display: none;}
+
+/* hide all file uploader becouse of the button to do that */
+.fileupload{display: none;}
+
+/* scrollable area setting */
+.scrollableArea {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+}
+
+/* scrollbar setting */
+::-webkit-scrollbar {width: 20px;}
+::-webkit-scrollbar-track {background-color: transparent;}
+::-webkit-scrollbar-thumb {
+    background-color: #a8bbbf;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+} 
+::-webkit-scrollbar-thumb:hover {background-color: #d6dee1;}
+
+/* border opacity setter */
+.border{
+  --bs-border-opacity: 0.8;
+}
+
+.configPage{
+  position: fixed;
+  top :0px;
+  left: 0px;
+}
+
+.accordion {
+  max-height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.returnToBack,.reloadCanvas{
+  font-size: 10px;
+}
+.pages{
+  max-height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

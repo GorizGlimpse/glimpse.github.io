@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- import jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- import bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <!-- import font Vazir Matn-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+    <!-- title data-->
+    <title>صفحه اصلي</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <!-- import css-->
+    <link rel="stylesheet" href="style/style.css">
+    <!-- import javascript-->
+    <script src="javaScript/java.js"></script>
+</head>
+<body>
+    <div class="container" oninput="changed();">
+        <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center beforeConfig">
+            <!-- starter page-->
+            <div class="card h-100 col-sm-6 border-0 shadow-lg starterPage">
+                <div class="card-body text-center">
+                    <p class="card-title p-3 h1">به نام خدا</p>
+                    <p class="card-text p-3 h4 text-muted pb-5 lh-base"> اگه براي ساخت كارت هاي بازي اماده اي  رو اين دكمه كليك كن تا شروع كنيم، قبلش حالت کارت هات رو انتخاب کن!</p>
+                    <!-- card mode-->
+                    <div class="input-group d-flex flex-column align-items-center p-3 text-disabled">
+                      <div class="dropdown drpd" dir="ltr">
+                          <a class="btn btn-secondary dropdown-toggle cardModeBTNtext" id="dropdownMenuLinkTXT" data-bs-toggle="dropdown">
+                            حالت كارت ها
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkTXT" >
+                            <li><a class="dropdown-item" onclick="modeSelector('twoSided');">حالت دو طرفه</a></li>
+                            <li><a class="dropdown-item" onclick="modeSelector('oneSidedText');">حالت يك طرفه | متن پيش فرض</a></li>
+                            <li><a class="dropdown-item" onclick="modeSelector('oneSidedPicture');">حالت يك طرفه | تصوير پيش فرض</a></li>
+                          </ul>
+                        </div>
+                  </div>
+                  <a href="#" class="btn btn-success py-4 col-sm-7 shadow" onclick="goToDataPage(this);">شروع</a>
+                </div>
+            </div>
+            <!-- data page-->
+            <div class="card h-100 col-sm-9 border-0 shadow-lg rounded dataPage" id="dataPage">
+                <!-- body part-->
+                <div class="card-body text-center">
+                    <p class="card-title p-3 h1">اطلاعات را وارد كنيد</p>
+                    
+                    <!-- scrollable area-->
+                    <div class="scrollableArea" id="scrollableArea">
+                        <img src="" class="shadow border border-success border-3 rounded float-end previewIMGplacehodler" hidden>
+                        <div class="row p-2 sample" id="sample" style="display:none ;">
+                        <!-- row delete botton-->
+                        <div class="col-1">
+                            <button type="button" class="btn sampleBOTT btn-danger  deleterowBTN" onclick="deleteROW(this);" hidden>حذف</button>
+                        </div>
+                        <!-- backside sample-->
+                        <div class="col">
+                            <div class="input-group col-sm-5 shadow sampleBOT" dir="ltr" onmouseover="showPRIMGBOT(this,event);" onmouseout="hidePRIMG();">
+                                <span class="input-group-text sampleBOT">پشت</span>
+                                <input type="text" class="form-control sampleBOT"oninput="addORnoBOT(this.value,this);">
+                                <input type="file" id="fileupload sampleBOT" class="fileupload sampleBOT"accept="image/png, image/jpeg" onchange="addFileBOT(this);"/>
+                                <button type="button" class="btn sampleBOT btn-danger fileUploaderDeleterBtnBOT" onclick="deleteFileBOT(this);" style="display:none ;"> حذف فايل</button>
+                                <button type="button" class="btn btn-secondary sampleBOT" onclick="performClick('fileupload sampleBOT');"> فايل</button> 
+                              </div>
+                        </div>
+                        <!-- topside sample-->
+                        <div class="col">
+                            <div class="input-group col-sm-5 shadow sample" dir="ltr"onmouseover="showPRIMGTOP(this,event);" onmouseout="hidePRIMG();">
+                                <span class="input-group-text sample">رو</span>
+                                <input type="text" class="form-control sample" oninput="addORnoTOP(this.value,this);" >
+                                <input type="file" id="fileupload sample" class="fileupload sample"accept="image/png, image/jpeg" onchange="addFileTOP(this);"/>
+                                <button type="button" class="btn sample btn-danger fileUploaderDeleterBtnTOP" onclick="deleteFileTOP(this);" style="display:none ;"> حذف فايل</button>
+                                <button type="button" class="btn btn-secondary sample" onclick="performClick('fileupload sample');" > فايل</button>
+                              </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- countinue part-->
+                    <div class="float-end p-3">
+                        <div class="input-group col-sm-5 shadow " dir="ltr">
+                            <span class="input-group-text needtoaddorremove"></span>
+                            <button type="button" class="btn btn-success countinueBTN" disabled onclick="final();doit();"> ادامه</button>
+                          </div>
+                    </div>
+                    <!-- create first row-->
+                    <script>createNewInput();</script>
+                </div>
+            </div>
+        </div>
+        <!-- conifgure page -->
+        <div class="configPage w-100 h-100">
+            <div class="row p-4 h-100">
+                <div class="card col-3 h-100 mainSettings">
+                    <div class="card-body">
+
+                      <a href="#" class="btn btn-warning col-sm-5 returnToBack m-2 shadow" onclick="returnToBack();">برگشت به مرحله قبل</a>
+                      <a href="#" class="btn btn-success m-2  col-sm-5 shadow reloadCanvas" onclick="doit();">بازنشانی</a>
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                  تنظيمات 
+                                </button>
+                              </h2>
+                              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body">
+                                    تنظيمات اينجان
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                  تنظيمات پيشرفته
+                                </button>
+                              </h2>
+                              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                <div class="accordion-body" dir="ltr">
+                                    <div class="p-1 input-group settingCardModel">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option value="cir">دايره</option>
+                                            <option value="rect">مستطيل</option>
+                                          </select>
+                                        <span class="input-group-text" id="basic-addon1">شكل كارت</span>
+                                      </div>
+                                      <div class="p-1 input-group settingPaperColor">
+                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#FFFFFF" title="Choose your color">
+                                        <span class="input-group-text" id="basic-addon1">رنگ كاغذ</span>
+                                      </div>
+                                      <div class="p-1 input-group settingCardBorderColor">
+                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#FFFFFF" title="Choose your color">
+                                        <span class="input-group-text" id="basic-addon1">رنگ حاشيه كارت</span>
+                                      </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                    </div>
+                </div>
+                <div class="col-1 freeSpaceMaker"></div>
+                <div class="card col-8 shower p-2">
+                    <div class="card-body pages p-3 border-3 ">
+                      <canvas id="paper"class="paper" style="border:1px solid black;"></canvas>
+                    </div>
+                    <div class="exporting d-flex justify-content-center align-items-center">
+                      <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow">راهنما</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow">خروجی گرفتن کارت های رو</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow">خروجی گرفتن کارت های پشت</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow">خروجی گرفتن هر دو طرف</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+    <script src="javascript/design.js"></script>
+</body>
+</html>
