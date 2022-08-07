@@ -41,10 +41,11 @@ body{background: linear-gradient(to right, #56ab2f , #a8e063);}
   left: 0px;
 }
 
-.accordion {
-  max-height: 80%;
+.settingPart {
+  max-height: 90%;
+  max-width: 90%;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 .returnToBack,.reloadCanvas{
   font-size: 10px;

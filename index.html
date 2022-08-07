@@ -21,9 +21,12 @@
     <link rel="stylesheet" href="style/style.css">
     <!-- import javascript-->
     <script src="javaScript/java.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+
 </head>
 <body>
     <div class="container" oninput="changed();">
+      <!-- <object data="./images/loading.svg" width="300" height="300"> </object> -->
         <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center beforeConfig">
             <!-- starter page-->
             <div class="card h-100 col-sm-6 border-0 shadow-lg starterPage">
@@ -85,7 +88,7 @@
                     <!-- countinue part-->
                     <div class="float-end p-3">
                         <div class="input-group col-sm-5 shadow " dir="ltr">
-                            <span class="input-group-text needtoaddorremove"></span>
+                            <span class="input-group-text needtoaddorremove">-</span>
                             <button type="button" class="btn btn-success countinueBTN" disabled onclick="final();doit();"> ادامه</button>
                           </div>
                     </div>
@@ -100,44 +103,73 @@
                 <div class="card col-3 h-100 mainSettings">
                     <div class="card-body">
 
-                      <a href="#" class="btn btn-warning col-sm-5 returnToBack m-2 shadow" onclick="returnToBack();">برگشت به مرحله قبل</a>
-                      <a href="#" class="btn btn-success m-2  col-sm-5 shadow reloadCanvas" onclick="doit();">بازنشانی</a>
+                      <a href="#" class="btn btn-warning col-sm-5 returnToBack m-2 shadow" onclick="returnToBack();">تغییر در اطلاعات</a>
+                      <a href="#" class="btn btn-success m-2  col-sm-5 shadow reloadCanvas" onclick="doit();">رفرش خروجی</a>
                         <div class="accordion" id="accordionPanelsStayOpenExample">
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            
+                            <div class="accordion-item settingPart">
+                              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                                   تنظيمات 
                                 </button>
                               </h2>
-                              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-                                    تنظيمات اينجان
-                                </div>
-                              </div>
-                            </div>
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                  تنظيمات پيشرفته
-                                </button>
-                              </h2>
                               <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                <div class="accordion-body" dir="ltr">
-                                    <div class="p-1 input-group settingCardModel">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option value="cir">دايره</option>
-                                            <option value="rect">مستطيل</option>
-                                          </select>
-                                        <span class="input-group-text" id="basic-addon1">شكل كارت</span>
-                                      </div>
-                                      <div class="p-1 input-group settingPaperColor">
-                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#FFFFFF" title="Choose your color">
-                                        <span class="input-group-text" id="basic-addon1">رنگ كاغذ</span>
-                                      </div>
-                                      <div class="p-1 input-group settingCardBorderColor">
-                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#FFFFFF" title="Choose your color">
-                                        <span class="input-group-text" id="basic-addon1">رنگ حاشيه كارت</span>
-                                      </div>
+                                <div class="accordion-body " dir="ltr" onchange="settingInitializer();">
+                                    
+
+                                  <div class="input-group mb-3">
+                                    <select class="form-select paperSizes" aria-label="Default select example">
+                                      <option selected value="a4">A4</option>
+                                      <option value="a5">A5</option>
+                                      <option value ="letter">Letter</option>
+                                    </select>
+                                    <span class="input-group-text">اندازه کاغذ</span>
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <input type="color" class="form-control form-control-color paperColor" id="exampleColorInput" value="#ffffff" title="رنگ کاغذ را انتخاب کنید">
+                                    <span class="input-group-text">رنگ کاغذ</span>
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <select class="form-select cardSize" aria-label="Default select example">
+                                      <option selected value="monopoly">Monopoly(Standard)</option>
+                                      <option value="oth1">43 x 65 mm</option>
+                                      <option value ="oth2">80 x 120 mm</option>
+                                    </select>
+                                    <span class="input-group-text">اندازه کارت ها</span>
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <input type="number" id="cardBorderSize" class="form-control cardBorderSize" max="200"min="0" value="0"/>
+                                    <span class="input-group-text">اندازه حاشیه</span>
+                                  </div>
+                                  <div class="input-group mb-3">
+                                    <input type="number" id="cardEsgeRoundSize" class="form-control cardEsgeRoundSize" max="200"min="0" value="0"/>
+                                    <span class="input-group-text">میزان گردی حاشیه</span>
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <input type="color" class="form-control form-control-color cardBorderColor" id="cardBorderColor" value="#1f2324" title="رنگ حاشیه را انتخاب کنید">
+                                    <span class="input-group-text">رنگ حاشیه کارت ها</span>
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <input type="color" class="form-control form-control-color cardColor" id="exampleColorInput" value="#f7f7f7" title="رنگ پس زمینه کارت را انتخاب کنید">
+                                    <span class="input-group-text">رنگ پس زمینه کارت ها</span>
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <input type="color" class="form-control form-control-color fontColor" id="fontColor" value="#000000" >
+                                    <span class="input-group-text">رنگ متن</span>
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <input type="number" id="fontSize" class="form-control fontSize"min="1" value="90"/>
+                                    <span class="input-group-text">اندازه فونت</span>
+                                  </div>
+
+                                  
                                 </div>
                               </div>
                             </div>
@@ -147,15 +179,16 @@
                 </div>
                 <div class="col-1 freeSpaceMaker"></div>
                 <div class="card col-8 shower p-2">
+                  <div class="exporting d-flex justify-content-center align-items-center">
+                    <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow">راهنما</a>
+                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow" onclick="frontExporting();">خروجی گرفتن کارت های رو</a>
+                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow" onclick="backExporting();">خروجی گرفتن کارت های پشت</a>
+                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow" onclick="dualExporting();">خروجی گرفتن هر دو طرف</a>
+                  </div>
                     <div class="card-body pages p-3 border-3 ">
-                      <canvas id="paper"class="paper" style="border:1px solid black;"></canvas>
+                      <canvas id="paper"class="paper"></canvas>
                     </div>
-                    <div class="exporting d-flex justify-content-center align-items-center">
-                      <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow">راهنما</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow">خروجی گرفتن کارت های رو</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow">خروجی گرفتن کارت های پشت</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow">خروجی گرفتن هر دو طرف</a>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -4,7 +4,8 @@ let paperColor = "#ffff";
 
 let cardHeight = 2466;
 let cardWidth = 1587;
-let cardBorderSize = 15;
+let cardBorderSize = 150;
+let maxBorderSize = parseInt(cardWidth/10);
 let cardBorderColor = "#000000";
 let cardEdgeRound = 50;
 let cardBackgroundColor = "#faba66";
@@ -13,15 +14,16 @@ let isCardRounded = true;
 let fontName = "Vazir";
 let textColor = "#000000";
 let fontSize = 120;
-
+var scla = 1;
 function show(prev) {
-    for (let q = 0; q < 10; q++) {$(".backPageNumber"+q).remove();}
-    for (let q = 0; q < 10; q++) {$(".frontPageNumber"+q).remove();}
-    for (let q = 0; q < 10; q++) {$(".paper").remove();}
+    for (let q = 0; q < 100; q++) {$(".backPageNumber"+q).remove();}
+    for (let q = 0; q < 100; q++) {$(".frontPageNumber"+q).remove();}
+    for (let q = 0; q < 100; q++) {$(".paper").remove();}
     $(".pages").append('<canvas id="paper"class="paper" style="border:1px solid black;"></canvas>');
-    if (prev) {
+    settingInitializer(false);    
+    if (prev==true) {
         var scl = Math.max($(".pages").width() / paperWidth, $(".pages").height() / paperHeight);
-
+        scla = scl;
         paperHeight = paperHeight*scl;
         paperWidth = paperWidth*scl;
 
@@ -31,12 +33,12 @@ function show(prev) {
         cardEdgeRound = cardEdgeRound*scl;
         fontSize = fontSize*scl;
     }
-
+    
 
 
 var paperElement = document.getElementById("paper");
 var paper = paperElement.getContext("2d");
-
+$(paperElement).css("transform", "transform: scale(0.01)");
 paper.canvas.height = paperHeight;
 paper.canvas.width = paperWidth;
 paper.fillStyle = paperColor;
@@ -127,6 +129,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight,fontSize) {
   
 function imageScalToFit(img,x,y,w,h,ctx){
     // get the scale
+    w = w - (w/4);
+    h = h - (h/4);
+    y = y -(h/8);
     var scale =Math.max((w/2) / (img.width), (h/2) / (img.height));
     // get the top left position of the image
     // var x = (w / 2) - (img.width / 2) * scale;
@@ -134,7 +139,7 @@ function imageScalToFit(img,x,y,w,h,ctx){
     // ctx.fillRect(x, y, img.width * scale, img.height * scale);
 
 
-    ctx.drawImage(img, x-((img.width* scale)/2), y-((img.height* scale)/4), img.width * scale, img.height * scale);
+    ctx.drawImage(img, (x-((img.width* scale)/2)), (y-((img.height* scale)/4)), img.width * scale, img.height * scale);
 }
 function fullBackImage(img,x,y,w,h,ctx) {
     var scale =Math.max((w/2) / (img.width), (h/2) / (img.height));
@@ -269,13 +274,21 @@ function cardCreatorBot(topOrBot) {
     }
 }
 
-//#region data
 let data = finalData.dt;
-            //#endregion
 let howManyCardIncluded = data[0].length;
 var cardNumber = 0;
 var nameNumber = 1;
+
+paper.font = (fontSize-10)+"px "+fontName;
+paper.fillStyle = textColor;
+paper.textAlign = "center";
+paper.fillText("صفحه رو - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
+
 while (cardNumber< howManyCardIncluded) {
+    paper.font = (fontSize-10)+"px "+fontName;
+    paper.fillStyle = textColor;
+    paper.textAlign = "center";
+    paper.fillText("صفحه رو - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
     cardCreatorTop(0);
     console.log("some lefted!");
     $(".paper").clone().appendTo(".pages");
@@ -288,14 +301,25 @@ while (cardNumber< howManyCardIncluded) {
     paper.fillStyle = paperColor;
     paper.fillRect(0, 0, paper.canvas.width, paper.canvas.height);
 }
+
 howManyCardIncluded = data[1].length;
 cardNumber = 0;
 nameNumber = 1;
+
+paper.font = (fontSize-10)+"px "+fontName;
+paper.fillStyle = textColor;
+paper.textAlign = "center";
+paper.fillText("صفحه پشت - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
+
 while (cardNumber< howManyCardIncluded) {
+    paper.font = (fontSize-10)+"px "+fontName;
+    paper.fillStyle = textColor;
+    paper.textAlign = "center";
+    paper.fillText("صفحه پشت - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
     cardCreatorBot(1);
     if (cardNumber>= howManyCardIncluded) {break;}
     console.log("some lefted!");
-    $(".paper").after("<br />").clone().appendTo(".pages");
+    $(".paper").clone().appendTo(".pages");
     $(".paper").first().attr("id","backPageNumber"+nameNumber.toString()).attr("class","backPageNumber"+nameNumber.toString());
     nameNumber++;
     paperElement = document.getElementById("paper");
@@ -306,10 +330,153 @@ while (cardNumber< howManyCardIncluded) {
     paper.fillRect(0, 0, paper.canvas.width, paper.canvas.height);
 }
 $(".paper").first().attr("id","backPageNumber"+nameNumber.toString()).attr("class","backPageNumber"+nameNumber.toString());
+}
+function doit() {
+    $(".pages").css("max-height",($(".mainSettings").height())*0.8);
+    show(true);
+}
+function settingInitializer(dd=true) {
+    if ($(".paperSizes").val() == "a4") {
+        paperWidth = 5953;
+        paperHeight = 8419;
+    }else if ($(".paperSizes").val() == "a5") {
+        paperWidth = 4195;
+        paperHeight = 5953;
+    }else if ($(".paperSizes").val() == "letter") {
+        console.log("letter");
+        paperWidth = 6120;
+        paperHeight = 7920;
+    }else{paperWidth = 5953;paperHeight = 8419;}
 
+    paperColor = $(".paperColor").val();
+
+    if ($(".cardSize").val() == "monopoly") {
+        cardWidth = 1587;
+        cardHeight = 2466;
+    }else if ($(".cardSize").val() == "oth1") {
+        console.log("letter");
+        cardWidth = 1219;
+        cardHeight = 1843;
+    }else{cardWidth = 2268;cardHeight = 3402;}
+
+
+    cardBorderSize = $(".cardBorderSize").val();
+
+    if ($(".cardEsgeRoundSize").val() == "0") {
+        isCardRounded = false;
+    }else{
+        isCardRounded = true;
+        cardEdgeRound = parseInt($(".cardEsgeRoundSize").val());
+    }
+
+    cardBorderColor = $(".cardBorderColor").val();
+
+    cardBackgroundColor = $(".cardColor").val();
+
+    textColor = $(".fontColor").val();
+
+    fontSize = $(".fontSize").val();
+    if (dd == true) {
+        doit(true);
+    }
+    
+}
+settingInitializer();
+
+function frontExporting() {
+    settingInitializer(false);
+    $(".pages").css("max-height",($(".mainSettings").height())*0.8);
+    show(false);
+    
+    var frontPagesArrays = [];
+    for (let q = 0; q < 100; q++) {
+        if( $(".frontPageNumber"+q).length )
+        {
+            var canvas = document.getElementById(("frontPageNumber"+q.toString()));
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            frontPagesArrays.push(imgData);
+        }
+    }
+    var pdf = new jsPDF({
+        unit: 'pt',
+        format: [(paperWidth)*0.75, (paperHeight)*0.75]
+    });
+    for (let i = 0; i < frontPagesArrays.length; i++) {
+    pdf.addImage(frontPagesArrays[i], 'JPEG', 0, 0);   
+    pdf.addPage();  
+    }
+    var pageCount = pdf.internal.getNumberOfPages();
+    pdf.deletePage(pageCount);
+    pdf.save("خروجی صفحات رو.pdf");
+    doit();
 }
 
-function doit() {
-    $(".pages").css("max-height",($(".shower").height())*0.9);
-    show(true);
+function backExporting() {
+    settingInitializer(false);
+    $(".pages").css("max-height",($(".mainSettings").height())*0.8);
+    show(false);
+    
+    var backPagesArrays = [];
+    for (let q = 0; q < 100; q++) {
+        if( $(".frontPageNumber"+q).length )
+        {
+            var canvas = document.getElementById(("backPageNumber"+q.toString()));
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            backPagesArrays.push(imgData);
+        }
+    }
+    var pdf = new jsPDF({
+        unit: 'pt',
+        format: [(paperWidth)*0.75, (paperHeight)*0.75]
+    });
+    for (let i = 0; i < backPagesArrays.length; i++) {
+    pdf.addImage(backPagesArrays[i], 'JPEG', 0, 0);   
+    pdf.addPage();  
+    }
+    var pageCount = pdf.internal.getNumberOfPages();
+    pdf.deletePage(pageCount);
+    pdf.save("خروجی صفحات پشت.pdf");
+    doit();
+}
+
+function dualExporting() {
+    settingInitializer(false);
+    $(".pages").css("max-height",($(".mainSettings").height())*0.8);
+    show(false);
+    
+    var backPagesArrays = [];
+    for (let q = 0; q < 100; q++) {
+        if( $(".frontPageNumber"+q).length )
+        {
+            var canvas = document.getElementById(("backPageNumber"+q.toString()));
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            backPagesArrays.push(imgData);
+        }
+    }
+    var frontPagesArrays = [];
+    for (let q = 0; q < 100; q++) {
+        if( $(".frontPageNumber"+q).length )
+        {
+            var canvas = document.getElementById(("frontPageNumber"+q.toString()));
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            frontPagesArrays.push(imgData);
+        }
+    }
+
+    var pdf = new jsPDF({
+        unit: 'pt',
+        format: [(paperWidth)*0.75, (paperHeight)*0.75]
+    });
+
+    for (let i = 0; i < frontPagesArrays.length; i++) {
+    pdf.addImage(frontPagesArrays[i], 'JPEG', 0, 0);   
+    pdf.addPage();
+    pdf.addImage(backPagesArrays[i], 'JPEG', 0, 0);   
+    pdf.addPage();  
+    }
+
+    var pageCount = pdf.internal.getNumberOfPages();
+    pdf.deletePage(pageCount);
+    pdf.save("خروجی صفحات یکی درمیان.pdf");
+    doit();
 }
