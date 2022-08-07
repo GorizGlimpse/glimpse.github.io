@@ -9,13 +9,15 @@ let maxBorderSize = parseInt(cardWidth/10);
 let cardBorderColor = "#000000";
 let cardEdgeRound = 50;
 let cardBackgroundColor = "#faba66";
+let cardBackBackgroundColor = "#faba66";
 let isCardRounded = true;
 
-let fontName = "Vazir";
+let fontName = "iransansMedium";
 let textColor = "#000000";
 let fontSize = 120;
 var scla = 1;
 function show(prev) {
+    
     for (let q = 0; q < 100; q++) {$(".backPageNumber"+q).remove();}
     for (let q = 0; q < 100; q++) {$(".frontPageNumber"+q).remove();}
     for (let q = 0; q < 100; q++) {$(".paper").remove();}
@@ -220,7 +222,7 @@ function cardCreatorBot(topOrBot) {
             
             paper.lineWidth = cardBorderSize;
             paper.strokeStyle = cardBorderColor;
-            paper.fillStyle = cardBackgroundColor;
+            paper.fillStyle = cardBackBackgroundColor;
             if (isCardRounded) {roundRect(x, y, cardWidth, cardHeight, cardEdgeRound);}
             else{paper.rect(x, y, cardWidth, cardHeight);paper.fill();}
             
@@ -252,7 +254,6 @@ function cardCreatorBot(topOrBot) {
                     if (crText.includes("data:image/")) {
 
                         if (finalData.mode =="oneSidedPicture") {
-                            console.log("OneSidedPicture");
                             var image = new Image();
                             image.src = crText;
                             fullBackImage(image,x,y,cardWidth,cardHeight,paper);
@@ -290,7 +291,6 @@ while (cardNumber< howManyCardIncluded) {
     paper.textAlign = "center";
     paper.fillText("صفحه رو - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
     cardCreatorTop(0);
-    console.log("some lefted!");
     $(".paper").clone().appendTo(".pages");
     $(".paper").first().attr("id","frontPageNumber"+nameNumber.toString()).attr("class","frontPageNumber"+nameNumber.toString());
     nameNumber++;
@@ -318,7 +318,6 @@ while (cardNumber< howManyCardIncluded) {
     paper.fillText("صفحه پشت - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
     cardCreatorBot(1);
     if (cardNumber>= howManyCardIncluded) {break;}
-    console.log("some lefted!");
     $(".paper").clone().appendTo(".pages");
     $(".paper").first().attr("id","backPageNumber"+nameNumber.toString()).attr("class","backPageNumber"+nameNumber.toString());
     nameNumber++;
@@ -331,6 +330,7 @@ while (cardNumber< howManyCardIncluded) {
 }
 $(".paper").first().attr("id","backPageNumber"+nameNumber.toString()).attr("class","backPageNumber"+nameNumber.toString());
 }
+
 function doit() {
     $(".pages").css("max-height",($(".mainSettings").height())*0.8);
     show(true);
@@ -343,7 +343,6 @@ function settingInitializer(dd=true) {
         paperWidth = 4195;
         paperHeight = 5953;
     }else if ($(".paperSizes").val() == "letter") {
-        console.log("letter");
         paperWidth = 6120;
         paperHeight = 7920;
     }else{paperWidth = 5953;paperHeight = 8419;}
@@ -354,7 +353,6 @@ function settingInitializer(dd=true) {
         cardWidth = 1587;
         cardHeight = 2466;
     }else if ($(".cardSize").val() == "oth1") {
-        console.log("letter");
         cardWidth = 1219;
         cardHeight = 1843;
     }else{cardWidth = 2268;cardHeight = 3402;}
@@ -372,6 +370,9 @@ function settingInitializer(dd=true) {
     cardBorderColor = $(".cardBorderColor").val();
 
     cardBackgroundColor = $(".cardColor").val();
+
+    cardBackBackgroundColor = $(".backcardColor").val();
+
 
     textColor = $(".fontColor").val();
 

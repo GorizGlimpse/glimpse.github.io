@@ -26,12 +26,11 @@
 </head>
 <body>
     <div class="container" oninput="changed();">
-      <!-- <object data="./images/loading.svg" width="300" height="300"> </object> -->
         <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center beforeConfig">
             <!-- starter page-->
             <div class="card h-100 col-sm-6 border-0 shadow-lg starterPage">
                 <div class="card-body text-center">
-                    <p class="card-title p-3 h1">به نام خدا</p>
+                    <p class="card-title p-3 h1 fontbold">به نام خدا</p>
                     <p class="card-text p-3 h4 text-muted pb-5 lh-base"> اگه براي ساخت كارت هاي بازي اماده اي  رو اين دكمه كليك كن تا شروع كنيم، قبلش حالت کارت هات رو انتخاب کن!</p>
                     <!-- card mode-->
                     <div class="input-group d-flex flex-column align-items-center p-3 text-disabled">
@@ -40,20 +39,20 @@
                             حالت كارت ها
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkTXT" >
-                            <li><a class="dropdown-item" onclick="modeSelector('twoSided');">حالت دو طرفه</a></li>
-                            <li><a class="dropdown-item" onclick="modeSelector('oneSidedText');">حالت يك طرفه | متن پيش فرض</a></li>
-                            <li><a class="dropdown-item" onclick="modeSelector('oneSidedPicture');">حالت يك طرفه | تصوير پيش فرض</a></li>
+                            <li><a class="dropdown-item fontlight" onclick="modeSelector('twoSided');">حالت دو طرفه</a></li>
+                            <li><a class="dropdown-item fontlight" onclick="modeSelector('oneSidedText');">حالت يك طرفه | متن پيش فرض</a></li>
+                            <li><a class="dropdown-item fontlight" onclick="modeSelector('oneSidedPicture');">حالت يك طرفه | تصوير پيش فرض</a></li>
                           </ul>
                         </div>
                   </div>
-                  <a href="#" class="btn btn-success py-4 col-sm-7 shadow" onclick="goToDataPage(this);">شروع</a>
+                  <a href="#" class="btn btn-success py-4 col-sm-7 shadow fontbold" onclick="goToDataPage(this);">شروع</a>
                 </div>
             </div>
             <!-- data page-->
             <div class="card h-100 col-sm-9 border-0 shadow-lg rounded dataPage" id="dataPage">
                 <!-- body part-->
                 <div class="card-body text-center">
-                    <p class="card-title p-3 h1">اطلاعات را وارد كنيد</p>
+                    <p class="card-title p-3 h1 fontbold">اطلاعات را وارد كنيد</p>
                     
                     <!-- scrollable area-->
                     <div class="scrollableArea" id="scrollableArea">
@@ -66,8 +65,8 @@
                         <!-- backside sample-->
                         <div class="col">
                             <div class="input-group col-sm-5 shadow sampleBOT" dir="ltr" onmouseover="showPRIMGBOT(this,event);" onmouseout="hidePRIMG();">
-                                <span class="input-group-text sampleBOT">پشت</span>
-                                <input type="text" class="form-control sampleBOT"oninput="addORnoBOT(this.value,this);">
+                                <span class="input-group-text sampleBOT fontbold">پشت</span>
+                                <input type="text" class="form-control sampleBOT fontlight"oninput="addORnoBOT(this.value,this);">
                                 <input type="file" id="fileupload sampleBOT" class="fileupload sampleBOT"accept="image/png, image/jpeg" onchange="addFileBOT(this);"/>
                                 <button type="button" class="btn sampleBOT btn-danger fileUploaderDeleterBtnBOT" onclick="deleteFileBOT(this);" style="display:none ;"> حذف فايل</button>
                                 <button type="button" class="btn btn-secondary sampleBOT" onclick="performClick('fileupload sampleBOT');"> فايل</button> 
@@ -76,8 +75,8 @@
                         <!-- topside sample-->
                         <div class="col">
                             <div class="input-group col-sm-5 shadow sample" dir="ltr"onmouseover="showPRIMGTOP(this,event);" onmouseout="hidePRIMG();">
-                                <span class="input-group-text sample">رو</span>
-                                <input type="text" class="form-control sample" oninput="addORnoTOP(this.value,this);" >
+                                <span class="input-group-text sample fontbold">رو</span>
+                                <input type="text" class="form-control sample fontlight" oninput="addORnoTOP(this.value,this);" >
                                 <input type="file" id="fileupload sample" class="fileupload sample"accept="image/png, image/jpeg" onchange="addFileTOP(this);"/>
                                 <button type="button" class="btn sample btn-danger fileUploaderDeleterBtnTOP" onclick="deleteFileTOP(this);" style="display:none ;"> حذف فايل</button>
                                 <button type="button" class="btn btn-secondary sample" onclick="performClick('fileupload sample');" > فايل</button>
@@ -88,8 +87,8 @@
                     <!-- countinue part-->
                     <div class="float-end p-3">
                         <div class="input-group col-sm-5 shadow " dir="ltr">
-                            <span class="input-group-text needtoaddorremove">-</span>
-                            <button type="button" class="btn btn-success countinueBTN" disabled onclick="final();doit();"> ادامه</button>
+                            <span class="input-group-text needtoaddorremove fontlight">-</span>
+                            <button type="button" class="btn btn-success countinueBTN fontbold" disabled onclick="final();doit();"> ادامه</button>
                           </div>
                     </div>
                     <!-- create first row-->
@@ -103,13 +102,13 @@
                 <div class="card col-3 h-100 mainSettings">
                     <div class="card-body">
 
-                      <a href="#" class="btn btn-warning col-sm-5 returnToBack m-2 shadow" onclick="returnToBack();">تغییر در اطلاعات</a>
-                      <a href="#" class="btn btn-success m-2  col-sm-5 shadow reloadCanvas" onclick="doit();">رفرش خروجی</a>
-                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                      <a href="#" class="btn btn-warning col-sm-5 returnToBack m-2 shadow fontbold" onclick="returnToBack();">تغییر در اطلاعات</a>
+                      <a href="#" class="btn btn-success m-2  col-sm-5 shadow reloadCanvas fontlight" onclick="doit();">رفرش خروجی</a>
+                        <div class="accordion ptd" id="accordionPanelsStayOpenExample">
                             
                             <div class="accordion-item settingPart">
                               <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                <button class="accordion-button collapsed fontbold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                                   تنظيمات 
                                 </button>
                               </h2>
@@ -158,6 +157,10 @@
                                     <input type="color" class="form-control form-control-color cardColor" id="exampleColorInput" value="#f7f7f7" title="رنگ پس زمینه کارت را انتخاب کنید">
                                     <span class="input-group-text">رنگ پس زمینه کارت ها</span>
                                   </div>
+                                  <div class="input-group mb-3">
+                                    <input type="color" class="form-control form-control-color backcardColor" id="exampleColorInput" value="#f7f7f7" title="رنگ پس زمینه کارت را انتخاب کنید">
+                                    <span class="input-group-text">رنگ پس زمینه پشت کارت</span>
+                                  </div>
 
                                   <div class="input-group mb-3">
                                     <input type="color" class="form-control form-control-color fontColor" id="fontColor" value="#000000" >
@@ -180,10 +183,10 @@
                 <div class="col-1 freeSpaceMaker"></div>
                 <div class="card col-8 shower p-2">
                   <div class="exporting d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow">راهنما</a>
-                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow" onclick="frontExporting();">خروجی گرفتن کارت های رو</a>
-                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow" onclick="backExporting();">خروجی گرفتن کارت های پشت</a>
-                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow" onclick="dualExporting();">خروجی گرفتن هر دو طرف</a>
+                    <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow fontlight">راهنما</a>
+                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="frontExporting();">خروجی گرفتن کارت های رو</a>
+                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="backExporting();">خروجی گرفتن کارت های پشت</a>
+                    <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="dualExporting();">خروجی گرفتن هر دو طرف</a>
                   </div>
                     <div class="card-body pages p-3 border-3 ">
                       <canvas id="paper"class="paper"></canvas>
