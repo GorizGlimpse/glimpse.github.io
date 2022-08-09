@@ -4,25 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- import jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- import bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <!-- import font Vazir Matn-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
     <!-- title data-->
-    <title>صفحه اصلي</title>
+    <title>صفحه ساخت کارت ها</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <!-- import css-->
     <link rel="stylesheet" href="style/style.css">
     <!-- import javascript-->
+    <script src="javaScript/bigdata.js"></script>
     <script src="javaScript/java.js"></script>
+    <!-- import jspdf-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
-
 </head>
 <body>
     <div class="container" oninput="changed();">
@@ -53,7 +48,6 @@
                 <!-- body part-->
                 <div class="card-body text-center">
                     <p class="card-title p-3 h1 fontbold">اطلاعات را وارد كنيد</p>
-                    
                     <!-- scrollable area-->
                     <div class="scrollableArea" id="scrollableArea">
                         <img src="" class="shadow border border-success border-3 rounded float-end previewIMGplacehodler" hidden>
@@ -84,11 +78,13 @@
                         </div>
                     </div>
                     </div>
+                    
                     <!-- countinue part-->
                     <div class="float-end p-3">
                         <div class="input-group col-sm-5 shadow " dir="ltr">
                             <span class="input-group-text needtoaddorremove fontlight">-</span>
-                            <button type="button" class="btn btn-success countinueBTN fontbold" disabled onclick="final();doit();"> ادامه</button>
+                            <button class="doitoder"onclick="doit();"hidden></button>
+                            <button type="button" class="btn btn-success countinueBTN fontbold" disabled onclick="final();"> ادامه</button>
                           </div>
                     </div>
                     <!-- create first row-->
@@ -96,16 +92,31 @@
                 </div>
             </div>
         </div>
+        
         <!-- conifgure page -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!--help modal-->
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">راهنما</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                در اینجا میتوانید راهنمایی ها را ببینید
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="configPage w-100 h-100">
+          <!-- setting-->
             <div class="row p-4 h-100">
                 <div class="card col-3 h-100 mainSettings">
                     <div class="card-body">
-
                       <a href="#" class="btn btn-warning col-sm-5 returnToBack m-2 shadow fontbold" onclick="returnToBack();">تغییر در اطلاعات</a>
                       <a href="#" class="btn btn-success m-2  col-sm-5 shadow reloadCanvas fontlight" onclick="doit();">رفرش خروجی</a>
-                        <div class="accordion ptd" id="accordionPanelsStayOpenExample">
-                            
+                        <div class="acrsettings">
+                          <div class="accordion ptd" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item settingPart">
                               <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                                 <button class="accordion-button collapsed fontbold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
@@ -114,76 +125,65 @@
                               </h2>
                               <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body " dir="ltr" onchange="settingInitializer();">
-                                    
-
                                   <div class="input-group mb-3">
                                     <select class="form-select paperSizes" aria-label="Default select example">
                                       <option selected value="a4">A4</option>
                                       <option value="a5">A5</option>
                                       <option value ="letter">Letter</option>
                                     </select>
-                                    <span class="input-group-text">اندازه کاغذ</span>
+                                    <span class="input-group-text fontlight">اندازه کاغذ</span>
                                   </div>
-
                                   <div class="input-group mb-3">
                                     <input type="color" class="form-control form-control-color paperColor" id="exampleColorInput" value="#ffffff" title="رنگ کاغذ را انتخاب کنید">
-                                    <span class="input-group-text">رنگ کاغذ</span>
+                                    <span class="input-group-text fontlight">رنگ کاغذ</span>
                                   </div>
-
                                   <div class="input-group mb-3">
                                     <select class="form-select cardSize" aria-label="Default select example">
                                       <option selected value="monopoly">Monopoly(Standard)</option>
                                       <option value="oth1">43 x 65 mm</option>
                                       <option value ="oth2">80 x 120 mm</option>
                                     </select>
-                                    <span class="input-group-text">اندازه کارت ها</span>
+                                    <span class="input-group-text fontlight">اندازه کارت </span>
                                   </div>
-
                                   <div class="input-group mb-3">
                                     <input type="number" id="cardBorderSize" class="form-control cardBorderSize" max="200"min="0" value="0"/>
-                                    <span class="input-group-text">اندازه حاشیه</span>
+                                    <span class="input-group-text fontlight">اندازه حاشیه</span>
                                   </div>
                                   <div class="input-group mb-3">
                                     <input type="number" id="cardEsgeRoundSize" class="form-control cardEsgeRoundSize" max="200"min="0" value="0"/>
-                                    <span class="input-group-text">میزان گردی حاشیه</span>
+                                    <span class="input-group-text fontlight">میزان گردی حاشیه</span>
                                   </div>
-
                                   <div class="input-group mb-3">
                                     <input type="color" class="form-control form-control-color cardBorderColor" id="cardBorderColor" value="#1f2324" title="رنگ حاشیه را انتخاب کنید">
-                                    <span class="input-group-text">رنگ حاشیه کارت ها</span>
+                                    <span class="input-group-text fontlight">رنگ حاشیه کارت </span>
                                   </div>
-
                                   <div class="input-group mb-3">
                                     <input type="color" class="form-control form-control-color cardColor" id="exampleColorInput" value="#f7f7f7" title="رنگ پس زمینه کارت را انتخاب کنید">
-                                    <span class="input-group-text">رنگ پس زمینه کارت ها</span>
+                                    <span class="input-group-text fontlight">رنگ بکگراند روی کارت </span>
                                   </div>
                                   <div class="input-group mb-3">
                                     <input type="color" class="form-control form-control-color backcardColor" id="exampleColorInput" value="#f7f7f7" title="رنگ پس زمینه کارت را انتخاب کنید">
-                                    <span class="input-group-text">رنگ پس زمینه پشت کارت</span>
+                                    <span class="input-group-text fontlight">رنگ بکگراند پشت کارت</span>
                                   </div>
-
                                   <div class="input-group mb-3">
                                     <input type="color" class="form-control form-control-color fontColor" id="fontColor" value="#000000" >
-                                    <span class="input-group-text">رنگ متن</span>
+                                    <span class="input-group-text fontlight">رنگ متن</span>
                                   </div>
-
                                   <div class="input-group mb-3">
                                     <input type="number" id="fontSize" class="form-control fontSize"min="1" value="90"/>
-                                    <span class="input-group-text">اندازه فونت</span>
+                                    <span class="input-group-text fontlight">اندازه فونت</span>
                                   </div>
-
-                                  
                                 </div>
                               </div>
                             </div>
                           </div>
-
+                        </div>
                     </div>
                 </div>
                 <div class="col-1 freeSpaceMaker"></div>
                 <div class="card col-8 shower p-2">
                   <div class="exporting d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow fontlight">راهنما</a>
+                    <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow fontlight"data-bs-toggle="modal" data-bs-target="#exampleModal">راهنما</a>
                     <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="frontExporting();">خروجی گرفتن کارت های رو</a>
                     <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="backExporting();">خروجی گرفتن کارت های پشت</a>
                     <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="dualExporting();">خروجی گرفتن هر دو طرف</a>
@@ -191,13 +191,13 @@
                     <div class="card-body pages p-3 border-3 ">
                       <canvas id="paper"class="paper"></canvas>
                     </div>
-                    
                 </div>
             </div>
         </div>
         <div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="javaScript/design.js"></script>
 </body>
 </html>

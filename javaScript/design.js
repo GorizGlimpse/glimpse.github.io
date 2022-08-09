@@ -17,7 +17,6 @@ let textColor = "#000000";
 let fontSize = 120;
 var scla = 1;
 function show(prev) {
-    
     for (let q = 0; q < 100; q++) {$(".backPageNumber"+q).remove();}
     for (let q = 0; q < 100; q++) {$(".frontPageNumber"+q).remove();}
     for (let q = 0; q < 100; q++) {$(".paper").remove();}
@@ -382,8 +381,6 @@ function settingInitializer(dd=true) {
     }
     
 }
-settingInitializer();
-
 function frontExporting() {
     settingInitializer(false);
     $(".pages").css("max-height",($(".mainSettings").height())*0.8);
@@ -411,7 +408,6 @@ function frontExporting() {
     pdf.save("خروجی صفحات رو.pdf");
     doit();
 }
-
 function backExporting() {
     settingInitializer(false);
     $(".pages").css("max-height",($(".mainSettings").height())*0.8);
@@ -439,7 +435,6 @@ function backExporting() {
     pdf.save("خروجی صفحات پشت.pdf");
     doit();
 }
-
 function dualExporting() {
     settingInitializer(false);
     $(".pages").css("max-height",($(".mainSettings").height())*0.8);
@@ -481,3 +476,6 @@ function dualExporting() {
     pdf.save("خروجی صفحات یکی درمیان.pdf");
     doit();
 }
+
+settingInitializer(dd=false);
+

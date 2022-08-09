@@ -73,3 +73,13 @@ body{background: linear-gradient(to right, #56ab2f , #a8e063);}
   overflow-y: auto;
   overflow-x: hidden;
 }
+.acrsettings{
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+.dataPage,.configPage{
+  opacity:0 ;
+}
