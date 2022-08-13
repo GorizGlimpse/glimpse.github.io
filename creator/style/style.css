@@ -11,7 +11,9 @@
   src: url("../fonts/fa-Iran-sans-web-light.ttf");
 }
 /* set defult font of page */
-*{font-family: 'iransansMedium', sans-serif;}
+*{
+  font-family: 'iransansMedium', sans-serif;
+}
 
 .fontbold{
   font-family:"iransansBold" ;
@@ -20,9 +22,20 @@
   font-family:"iransansLight" ;
 }
 /* body color setter */
-body{background: linear-gradient(to right, #56ab2f , #a8e063);}
+body{
+  background-color: #f2f5fc;
+  background: url(../images/hero-bg.png) top center no-repeat;
+}
 /* all cards color setter */
-.card{background: linear-gradient(to right, #02aab0  , #00cdac);}
+.card{background-color: #c9e6f8;}
+
+.btn.notDelete{
+  background-color: #4154f1;
+  border: 0px;
+}
+.cardModeBTNtext{
+  color: white;
+}
 
 /* ***PAGE HIDDER*** */
 .dataPage,.configPage{display: none;}

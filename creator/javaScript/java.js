@@ -32,7 +32,10 @@ let dataArray = numberDataDetails[1];
 $(document).ready(function() {
   $("input:text").focus(function() { $(this).select(); } );
 });
-
+$(window).on('load', function() {
+  $(".starterPage").fadeOut(1);
+  $(".starterPage").fadeIn(600);
+});
 // file upload to arrays
 function addFileTOP(input) {
   if (input.files && input.files[0]) {
@@ -452,6 +455,7 @@ function finalDobbleCreator(userArray) {
     },function(){
       $(".dataPage").css("display","none");
       $(".configPage").css("display","block").css("top",($(".waiter").height())*1.5+"px");
+      $(".body").css("background-image","url(./images/hero-bg-fliped.png)");
       $(".waiter").css("display","block");
       $(".configPage").animate({
          opacity: '1'

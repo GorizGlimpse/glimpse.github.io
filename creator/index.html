@@ -19,7 +19,7 @@
     <!-- import jspdf-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
 </head>
-<body>
+<body class="body">
   
     <div class="container" oninput="changed();">
       <p class="waiter fontbold h4 p-3"style="display:none;">در حال پردازش اطلاعات ، لطفا صبر کنید</p>
@@ -32,7 +32,7 @@
                     <!-- card mode-->
                     <div class="input-group d-flex flex-column align-items-center p-3 text-disabled">
                       <div class="dropdown drpd" dir="ltr">
-                          <a class="btn btn-secondary dropdown-toggle cardModeBTNtext" id="dropdownMenuLinkTXT" data-bs-toggle="dropdown">
+                          <a class="btn btn-info dropdown-toggle cardModeBTNtext notDelete" id="dropdownMenuLinkTXT" data-bs-toggle="dropdown">
                             حالت كارت ها
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkTXT" >
@@ -42,7 +42,7 @@
                           </ul>
                         </div>
                   </div>
-                  <a href="#" class="btn btn-success py-4 col-sm-7 shadow fontbold" onclick="goToDataPage(this);">شروع</a>
+                  <a href="#" class="btn btn-success py-4 col-sm-7 shadow fontbold notDelete" onclick="goToDataPage(this);">شروع</a>
                 </div>
             </div>
             <!-- data page-->
@@ -61,7 +61,7 @@
                         <!-- backside sample-->
                         <div class="col">
                             <div class="input-group col-sm-5 shadow sampleBOT" dir="ltr" onmouseover="showPRIMGBOT(this,event);" onmouseout="hidePRIMG();">
-                                <span class="input-group-text sampleBOT fontbold">پشت</span>
+                                <span class="input-group-text sampleBOT fontbold textForBotOrTop">پشت</span>
                                 <input type="text" class="form-control sampleBOT fontlight"oninput="addORnoBOT(this.value,this);">
                                 <input type="file" id="fileupload sampleBOT" class="fileupload sampleBOT"accept="image/png, image/jpeg" onchange="addFileBOT(this);"/>
                                 <button type="button" class="btn sampleBOT btn-danger fileUploaderDeleterBtnBOT" onclick="deleteFileBOT(this);" style="display:none ;"> حذف فايل</button>
@@ -71,11 +71,11 @@
                         <!-- topside sample-->
                         <div class="col">
                             <div class="input-group col-sm-5 shadow sample" dir="ltr"onmouseover="showPRIMGTOP(this,event);" onmouseout="hidePRIMG();">
-                                <span class="input-group-text sample fontbold">رو</span>
+                                <span class="input-group-text sample fontbold textForBotOrTop">رو</span>
                                 <input type="text" class="form-control sample fontlight" oninput="addORnoTOP(this.value,this);" >
                                 <input type="file" id="fileupload sample" class="fileupload sample"accept="image/png, image/jpeg" onchange="addFileTOP(this);"/>
                                 <button type="button" class="btn sample btn-danger fileUploaderDeleterBtnTOP" onclick="deleteFileTOP(this);" style="display:none ;"> حذف فايل</button>
-                                <button type="button" class="btn btn-secondary sample" onclick="performClick('fileupload sample');" > فايل</button>
+                                <button type="button" class="btn btn-secondary sample notDelete" onclick="performClick('fileupload sample');" > فايل</button>
                               </div>
                         </div>
                     </div>
@@ -105,7 +105,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                در اینجا میتوانید راهنمایی ها را ببینید
+                راهنمایی برای خروجی گرفتن : 
+	زمانی که شما خروجی میگیرید شما فایل pdf خروجی خواهید گرفت که میتوانید انها را چاپ کنید
+
+
               </div>
             </div>
           </div>
@@ -178,9 +181,9 @@
                     </div>
                     <div class="exporting d-flex justify-content-center align-items-center">
                       <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow fontlight"data-bs-toggle="modal" data-bs-target="#exampleModal">راهنما</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold frontExport" onclick="frontExporting();">خروجی گرفتن کارت های رو</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="backExporting();">خروجی گرفتن کارت های پشت</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold" onclick="dualExporting();">خروجی گرفتن هر دو طرف</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold frontExport notDelete" onclick="frontExporting();">خروجی گرفتن کارت های رو</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold notDelete" onclick="backExporting();">خروجی گرفتن کارت های پشت</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold notDelete" onclick="dualExporting();">خروجی گرفتن هر دو طرف</a>
                     </div>
                 </div>
             </div>
