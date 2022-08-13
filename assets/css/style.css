@@ -468,6 +468,18 @@ div.box.val{
   background: url(../img/hero-bg.png) top center no-repeat;
   background-size: cover;
 }
+.btn.contactus{
+  color: white;
+  border: 0px;
+  background-color:#4154f1;
+  position: fixed;
+  bottom: 10%;
+  left: -30px;
+  transform: rotate(90deg);
+}
+.btn.contactus:hover{
+  background-color:#6776f4;
+}
 
 .hero h1 {
   margin: 0;
@@ -805,6 +817,7 @@ div.box.val{
   font-size: 20px;
   top: -15px;
   left: -3px;
+  padding: 20px;
 }
 
 .pricing .price span {

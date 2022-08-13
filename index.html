@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>تیزساز | صفحه اصلی | نسخه 3.78</title>
+  <title>تیزساز | صفحه اصلی | نسخه 3.7</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -28,11 +29,55 @@
 </head>
 
 <body>
-
+  <div class="container">
+    <button class="btn notDelete contactus"data-bs-toggle="modal" data-bs-target="#exampleModal">ارسال پیام</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">ارسال پیام</h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">نام و نام خانوادگی</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="نام نام خانوادگی">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">نشانی ایمیل</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">شماره تماس</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="0912XXXXXXX"maxlength="11">
+            </div>
+            <div class="mb-3">
+              <label for="selectwhat" class="form-label">قسمت</label>
+              <select id="selectwhat"class="form-select" aria-label="Default select example">
+                <option selected>پیشنهادات</option>
+                <option value="1">اشکالات</option>
+                <option value="2">سوالات</option>
+                <option value="3">غیره</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">متن پیام</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="پیام خود را وارد کنید"></textarea>
+            </div>
+            <p style="font-size:10px ;" class="text-center">نشانی ایمیل یا شماره تلفن همراه الزامیست</p>
+          </div>
+          <div class="modal-footer"dir="ltr">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">خروج</button>
+            <button type="button" class="btn btn-primary">ارسال پیام</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-
+        
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span>تیز ساز</span>
@@ -61,7 +106,7 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero d-flex align-items-center">
-
+    
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
@@ -86,6 +131,7 @@
   </section><!-- End Hero -->
 
   <main id="main">
+    
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
 
@@ -204,7 +250,7 @@
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
           <div class="box">
             <h3 style="color: #ff901c;">طرح پیشرفته</h3>
-            <div class="price"><sup>تومان</sup>50,000<span> / فصل</span></div>
+            <div class="price"><sup>تومان</sup>50,000<span> / سه ماه</span></div>
             <img src="assets/img/pricing-business.png" class="img-fluid" alt="">
             <ul>
               <li>استفاده از تمامی تنظیمات ساخت کارت ها</li>
