@@ -126,9 +126,7 @@ const wrapText = function(ctx, text, x, y, maxWidth, lineHeight,maxHeight) {
         }
     }
     // Return the line array
-    console.log(howmanyLines*lineHeight+"  "+maxHeight);
     while (howmanyLines*lineHeight >= maxHeight) {
-        console.log("entered while hereeeeeeeee");
         fontSize--;
         lineHeight = fontSize*1.2;
         ctx.font = parseInt(fontSize).toString()+"px "+fontName;
@@ -316,7 +314,7 @@ function cardCreatorBot(topOrBot) {
                         }
                         
                     }else{
-                        wrapText(paper,crText,textX,textY+(availableAreaHeight/2),availableAreaWidth-(((cardWidth/colAndRom[0])/15)*3),(fontSize+(fontSize/5)),fontSize);
+                        wrapText(paper,crText,textX,textY,availableAreaWidth-(((cardWidth/colAndRom[0])/15)*3),(fontSize+(fontSize/5)),fontSize,availableAreaHeight);
                     }
     
                 }

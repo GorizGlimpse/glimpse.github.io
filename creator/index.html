@@ -196,16 +196,21 @@
                 <div class="col-1 freeSpaceMaker"></div>
                 <div class="card col-8 shower p-2">
                   <p class="h2 text-center">پیش نمایش</p>
+                  <figcaption class="blockquote-footer" style="font-size: 10px;"dir="rtl">
+                    در صورتی که تصاویر را مشاهده نمیکنید خروجی را بروز رسانی کنید
+                  </figcaption>
                     <div class="card-body pages p-3 border-3 ">
                       <canvas id="paper"class="paper"></canvas>
                       
                     </div>
+                    
                     <div class="exporting d-flex justify-content-center align-items-center">
                       <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow fontlight"data-bs-toggle="modal" data-bs-target="#exampleModal">راهنما</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold frontExport notDelete" onclick="frontExporting();">خروجی گرفتن کارت های رو</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold notDelete" onclick="backExporting();">خروجی گرفتن کارت های پشت</a>
-                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold notDelete" onclick="dualExporting();">خروجی گرفتن هر دو طرف</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold frontExport notDelete" onclick="frontExporting();">خروجی کارت های رو</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold notDelete" onclick="backExporting();">خروجی کارت های پشت</a>
+                      <a href="#" class="btn btn-success m-2 p-2 col-sm-3 shadow fontbold notDelete" onclick="dualExporting();">خروجی هر دو طرف</a>
                     </div>
+                    
                 </div>
             </div>
         </div>

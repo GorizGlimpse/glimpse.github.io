@@ -36,7 +36,9 @@ $(window).on('load', function() {
   $(".starterPage").fadeOut(1);
   $(".starterPage").fadeIn(600);
 });
-window.onbeforeunload = function() {};
+window.onbeforeunload = function() {
+  return " are you sure ? ";
+};
 // file upload to arrays
 function addFileTOP(input) {
   if (input.files && input.files[0]) {
