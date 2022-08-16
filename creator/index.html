@@ -52,6 +52,7 @@
                 <div class="card-body text-center">
                     <p class="card-title p-3 h1 fontbold">اطلاعات را وارد كنيد</p>
                     <!-- scrollable area-->
+                    <div class="bodyentrypart">
                     <div class="scrollableArea" id="scrollableArea">
                         <img src="" class="shadow border border-success border-3 rounded float-end previewIMGplacehodler" hidden>
                         <div class="row p-2 sample" id="sample" style="display:none ;">
@@ -61,11 +62,11 @@
                         </div>
                         <!-- backside sample-->
                         <div class="col">
-                            <div class="input-group col-sm-5 shadow sampleBOT" dir="ltr" onmouseover="showPRIMGBOT(this,event);" onmouseout="hidePRIMG();">
+                            <div class="input-group col-sm-5 shadow sampleBOT" dir="ltr" >
                                 <span class="input-group-text sampleBOT fontbold textForBotOrTop">پشت</span>
                                 <input type="text" class="form-control sampleBOT fontlight"oninput="addORnoBOT(this.value,this);">
                                 <input type="file" id="fileupload sampleBOT" class="fileupload sampleBOT"accept="image/png, image/jpeg" onchange="addFileBOT(this);"/>
-                                <button type="button" class="btn sampleBOT btn-danger fileUploaderDeleterBtnBOT" onclick="deleteFileBOT(this);" style="display:none ;"> حذف فايل</button>
+                                <button type="button" class="btn sampleBOT btn-danger fileUploaderDeleterBtnBOT" onclick="deleteFileBOT(this);" style="display:none ;"onmouseover="showPRIMGBOT(this,event);" onmouseout="hidePRIMG();"> حذف فايل</button>
                                 <button type="button" class="btn btn-secondary sampleBOT" onclick="performClick('fileupload sampleBOT');"> فايل</button> 
                               </div>
                         </div>
@@ -75,13 +76,13 @@
                                 <span class="input-group-text sample fontbold textForBotOrTop">رو</span>
                                 <input type="text" class="form-control sample fontlight" oninput="addORnoTOP(this.value,this);" >
                                 <input type="file" id="fileupload sample" class="fileupload sample"accept="image/png, image/jpeg" onchange="addFileTOP(this);"/>
-                                <button type="button" class="btn sample btn-danger fileUploaderDeleterBtnTOP" onclick="deleteFileTOP(this);" style="display:none ;"> حذف فايل</button>
+                                <button type="button" class="btn sample btn-danger fileUploaderDeleterBtnTOP" onclick="deleteFileTOP(this);" style="display:none ;"onmouseover="showPRIMGTOP(this,event);" onmouseout="hidePRIMG();"> حذف فايل</button>
                                 <button type="button" class="btn btn-secondary sample notDelete" onclick="performClick('fileupload sample');" > فايل</button>
                               </div>
                         </div>
                     </div>
                     </div>
-                    
+                  </div>
                     <!-- countinue part-->
                     <div class="float-end p-3">
                         <div class="input-group col-sm-5 shadow " dir="ltr">
@@ -132,7 +133,7 @@
         <div class="configPage w-100 h-100">
           <!-- setting-->
             <div class="row p-4 h-100">
-                <div class="card col-3 h-100 mainSettings">
+                <div class="card col-3 h-100 mainSettings"onchange="settingInitializer();">
                     <div class="card-body">
                       <a href="#" class="btn btn-warning col-sm-5 returnToBack m-2 shadow fontbold" onclick="returnToBack();">تغییر در اطلاعات</a>
                       <a href="#" class="btn btn-success m-2  col-sm-5 shadow reloadCanvas fontlight" onclick="doit();">رفرش خروجی</a>
@@ -186,6 +187,9 @@
                             <input type="number" id="fontSize" class="form-control fontSize"min="1" value="90"/>
                             <span class="input-group-text fontlight">اندازه فونت</span>
                           </div>
+                          <figcaption class="blockquote-footer" style="font-size: 10px;"dir="rtl">
+                            در صورتی که فونت را بیش از اندازه بزرگ کنید ،متن شما کوچک تر خواهد شد!
+                          </figcaption>
                         </div>
                     </div>
                 </div>
@@ -194,6 +198,7 @@
                   <p class="h2 text-center">پیش نمایش</p>
                     <div class="card-body pages p-3 border-3 ">
                       <canvas id="paper"class="paper"></canvas>
+                      
                     </div>
                     <div class="exporting d-flex justify-content-center align-items-center">
                       <a href="#" class="btn btn-info m-2 p-2 col-sm-1 shadow fontlight"data-bs-toggle="modal" data-bs-target="#exampleModal">راهنما</a>

@@ -36,6 +36,7 @@ $(window).on('load', function() {
   $(".starterPage").fadeOut(1);
   $(".starterPage").fadeIn(600);
 });
+window.onbeforeunload = function() {};
 // file upload to arrays
 function addFileTOP(input) {
   if (input.files && input.files[0]) {
@@ -329,13 +330,16 @@ function showPRIMGTOP(ths,evnt){
 }
 //show preview image for uploaded file on mouse enter to input gruop bottom
 function showPRIMGBOT(ths,evnt){
-  var indexnumber = Number((ths.className.split(" ")[3]).replace(/number/g,"").replace(/BOT/g,""))-1;
-  var x= evnt.clientX;
-  var y = evnt.clientY;
-  var crelemnt = inputBOT[indexnumber];
-  if (crelemnt.includes("data:image")) {
-    $(".previewIMGplacehodler").removeAttr("hidden").attr('src',crelemnt).css({top: y, left: x-previewImgWidth, position:'fixed',width: previewImgWidth});
+  if (currentState=="twoSided") {
+    var indexnumber = Number((ths.className.split(" ")[3]).replace(/number/g,"").replace(/BOT/g,""))-1;
+    var x= evnt.clientX;
+    var y = evnt.clientY;
+    var crelemnt = inputBOT[indexnumber];
+    if (crelemnt.includes("data:image")) {
+      $(".previewIMGplacehodler").removeAttr("hidden").attr('src',crelemnt).css({top: y, left: x-previewImgWidth, position:'fixed',width: previewImgWidth});
+    }
   }
+  
 }
 
 // hide preview image

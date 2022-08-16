@@ -3,6 +3,7 @@ let paperWidth = 5953;
 let paperColor = "#ffff";
 
 let cardHeight = 2466;
+let mazFontsize = parseInt(cardHeight/11);
 let cardWidth = 1587;
 let cardBorderSize = 150;
 let maxBorderSize = parseInt(cardWidth/10);
@@ -23,8 +24,10 @@ function show(prev) {
     $(".pages").append('<canvas id="paper"class="paper" style="border:1px solid black;"></canvas>');
     settingInitializer(false);    
     if (prev==true) {
-        var scl = Math.max($(".pages").width() / paperWidth, $(".pages").height() / paperHeight);
-        scla = scl;
+        var scl =1;// Math.max($(".pages").width() / paperWidth, $(".pages").height() / paperHeight);
+        var xdr = (Math.max($(".pages").width() / paperWidth, $(".pages").height() / paperHeight));
+        // $(".paper").css('transform','scale('+xdr+')');
+        scl = xdr;
         paperHeight = paperHeight*scl;
         paperWidth = paperWidth*scl;
 
@@ -39,7 +42,6 @@ function show(prev) {
 
 var paperElement = document.getElementById("paper");
 var paper = paperElement.getContext("2d");
-$(paperElement).css("transform", "transform: scale(0.01)");
 paper.canvas.height = paperHeight;
 paper.canvas.width = paperWidth;
 paper.fillStyle = paperColor;
@@ -77,55 +79,106 @@ function roundRect(x, y, w, h, radius)
   context.quadraticCurveTo(x, y, x+radius, y);
   context.fill();
 }
-function wrapText(context, text, x, y, maxWidth, lineHeight,fontSize) {
+function wrapText(context, text, xx, yy, maxWidth, lineHeight,fontSize,maxheight) {
+let ctx = context;
 
-    
+// @description: wrapText wraps HTML canvas text onto a canvas of fixed width
+// @param ctx - the context for the canvas we want to wrap text on
+// @param text - the text we want to wrap.
+// @param x - the X starting point of the text on the canvas.
+// @param y - the Y starting point of the text on the canvas.
+// @param maxWidth - the width at which we want line breaks to begin - i.e. the maximum width of the canvas.
+// @param lineHeight - the height of each line, so we can space them below each other.
+// @returns an array of [ lineText, x, y ] for all lines
+const wrapText = function(ctx, text, x, y, maxWidth, lineHeight,maxHeight) {
+    // First, start by splitting all of our text into words, but splitting it into an array split by spaces
     let words = text.split(' ');
-    let line = '';
-    context.font = fontSize+"px "+fontName;
+    let line = ''; // This will store the text of the current line
+    let testLine = ''; // This will store the text when we add a word, to test if it's too long
+    let lineArray = []; // This is an array of lines, which the function will return
 
-    let firstY = y;
-    let finalY = 0;
-    let numOfLines = 1;
-    
-    for(let nnk = 0; nnk < words.length; nnk++) {
-      let testLine = line + words[nnk] + ' ';
-      let metrics = context.measureText(testLine);
-      let testWidth = metrics.width;
-      if (testWidth > maxWidth && nnk > 0) {
-        numOfLines++;
-        y += lineHeight;
-      }
-      else 
-      {line = testLine;}
-      
-    }
-    while ((numOfLines*lineHeight)>(firstY-(finalY+lineHeight))) {
-        lineHeight--;
-        fontSize--;
-    }
-    context.font = fontSize+"px "+fontName;
+    var howmanyLines = 1;
 
-    y = firstY;
-    if (numOfLines!=1) {
-        y = firstY - (fontSize);
-    }
-    line = '';
-    for(let n = 0; n < words.length; n++) {
-        let testLine = line + words[n] + ' ';
-        let metrics = context.measureText(testLine);
+    // Lets iterate over each word
+    for(var n = 0; n < words.length; n++) {
+        // Create a test line, and measure it..
+        testLine += `${words[n]} `;
+        let metrics = ctx.measureText(testLine);
         let testWidth = metrics.width;
+        // If the width of this test line is more than the max width
         if (testWidth > maxWidth && n > 0) {
-          context.fillText(line, x, y);
-          line = words[n] + ' ';
-          y += lineHeight;
+            // Then the line is finished, push the current line into "lineArray"
+            lineArray.push([line, x, y]);
+            // Increase the line height, so a new line is started
+            y += lineHeight;
+            howmanyLines++;
+            // Update line and test line to use this word as the first word on the next line
+            line = `${words[n]} `;
+            testLine = `${words[n]} `;
         }
         else {
-          line = testLine;
+            // If the test line is still less than the max width, then add the word to the current line
+            line += `${words[n]} `;
         }
-      }
+        // If we never reach the full max width, then there is only one line.. so push it into the lineArray so we return something
+        if(n === words.length - 1) {
+            lineArray.push([line, x, y]);
+        }
+    }
+    // Return the line array
+    console.log(howmanyLines*lineHeight+"  "+maxHeight);
+    while (howmanyLines*lineHeight >= maxHeight) {
+        console.log("entered while hereeeeeeeee");
+        fontSize--;
+        lineHeight = fontSize*1.2;
+        ctx.font = parseInt(fontSize).toString()+"px "+fontName;
+    }
+    lineHeight = fontSize*1.2;
+     words = text.split(' ');
+     line = ''; // This will store the text of the current line
+     testLine = ''; // This will store the text when we add a word, to test if it's too long
+     lineArray = []; // This is an array of lines, which the function will return
+     x = xx;
+     y =yy;
+     howmanyLines = 1;
+    // Lets iterate over each word
+    for(var n = 0; n < words.length; n++) {
+        // Create a test line, and measure it..
+        testLine += `${words[n]} `;
+        let metrics = ctx.measureText(testLine);
+        let testWidth = metrics.width;
+        // If the width of this test line is more than the max width
+        if (testWidth > maxWidth && n > 0) {
+            // Then the line is finished, push the current line into "lineArray"
+            lineArray.push([line, x, y]);
+            // Increase the line height, so a new line is started
+            y += lineHeight;
+            howmanyLines++;
+            // Update line and test line to use this word as the first word on the next line
+            line = `${words[n]} `;
+            testLine = `${words[n]} `;
+        }
+        else {
+            // If the test line is still less than the max width, then add the word to the current line
+            line += `${words[n]} `;
+        }
+        // If we never reach the full max width, then there is only one line.. so push it into the lineArray so we return something
+        if(n === words.length - 1) {
+            lineArray.push([line, x, y]);
+        }
+    }
 
-    context.fillText(line, x, y);
+    ctx.font = parseInt(fontSize).toString()+"px "+fontName;
+    return lineArray;
+}
+// More text
+ctx.font = parseInt(fontSize).toString()+"px "+fontName;
+ctx.fillStyle = textColor;
+let wrappedText = wrapText(ctx, text, xx, yy, maxWidth, fontSize*1.2,maxheight);
+wrappedText.forEach(function(item) {
+    ctx.fillText(item[0], item[1], item[2]); 
+})
+    
 }
   
 function imageScalToFit(img,x,y,w,h,ctx){
@@ -199,7 +252,7 @@ function cardCreatorTop(topOrBot) {
                         
                         imageScalToFit(image,textX,textY,availableAreaWidth-(((cardWidth/colAndRom[0])/15)*3),availableAreaHeight,paper);
                     }else{
-                        wrapText(paper,crText,textX,textY,availableAreaWidth-(((cardWidth/colAndRom[0])/15)*3),(fontSize+(fontSize/5)),fontSize);
+                        wrapText(paper,crText,textX,textY,availableAreaWidth-((((cardWidth)/colAndRom[0])/15)*3),(fontSize+(fontSize/5)),fontSize,availableAreaHeight);
                     }
     
                 }
@@ -263,7 +316,7 @@ function cardCreatorBot(topOrBot) {
                         }
                         
                     }else{
-                        wrapText(paper,crText,textX,textY,availableAreaWidth-(((cardWidth/colAndRom[0])/15)*3),(fontSize+(fontSize/5)),fontSize);
+                        wrapText(paper,crText,textX,textY+(availableAreaHeight/2),availableAreaWidth-(((cardWidth/colAndRom[0])/15)*3),(fontSize+(fontSize/5)),fontSize);
                     }
     
                 }
@@ -279,16 +332,16 @@ let howManyCardIncluded = data[0].length;
 var cardNumber = 0;
 var nameNumber = 1;
 
-paper.font = (fontSize-10)+"px "+fontName;
+paper.font = (cardHeight/30)+"px "+fontName;
 paper.fillStyle = textColor;
 paper.textAlign = "center";
-paper.fillText("صفحه رو - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
+paper.fillText("صفحه رو - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(cardHeight/30));
 
 while (cardNumber< howManyCardIncluded) {
-    paper.font = (fontSize-10)+"px "+fontName;
+    paper.font = (cardHeight/30)+"px "+fontName;
     paper.fillStyle = textColor;
     paper.textAlign = "center";
-    paper.fillText("صفحه رو - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
+    paper.fillText("صفحه رو - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(cardHeight/30));
     cardCreatorTop(0);
     $(".paper").clone().appendTo(".pages");
     $(".paper").first().attr("id","frontPageNumber"+nameNumber.toString()).attr("class","frontPageNumber"+nameNumber.toString());
@@ -305,16 +358,16 @@ howManyCardIncluded = data[1].length;
 cardNumber = 0;
 nameNumber = 1;
 
-paper.font = (fontSize-10)+"px "+fontName;
+paper.font = (cardHeight/30)+"px "+fontName;
 paper.fillStyle = textColor;
 paper.textAlign = "center";
-paper.fillText("صفحه پشت - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
+paper.fillText("صفحه پشت - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(cardHeight/30));
 
 while (cardNumber< howManyCardIncluded) {
-    paper.font = (fontSize-10)+"px "+fontName;
+    paper.font = (cardHeight/30)+"px "+fontName;
     paper.fillStyle = textColor;
     paper.textAlign = "center";
-    paper.fillText("صفحه پشت - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(fontSize/2));
+    paper.fillText("صفحه پشت - شماره "+nameNumber.toString(), paperWidth/2, paperHeight-(cardHeight/30));
     cardCreatorBot(1);
     if (cardNumber>= howManyCardIncluded) {break;}
     $(".paper").clone().appendTo(".pages");
@@ -376,6 +429,10 @@ function settingInitializer(dd=true) {
     textColor = $(".fontColor").val();
 
     fontSize = $(".fontSize").val();
+
+    // $(".fontSize").attr({
+    //     "max" : mazFontsize     });
+
     if (dd == true) {
         doit(true);
     }
@@ -386,6 +443,7 @@ function frontExporting() {
     settingInitializer(false);
     $(".pages").css("max-height",($(".mainSettings").height())*0.8);
     show(false);
+    
     
     var frontPagesArrays = [];
     for (let q = 0; q < 100; q++) {
@@ -408,6 +466,7 @@ function frontExporting() {
     pdf.deletePage(pageCount);
     pdf.save("خروجی صفحات رو.pdf");
     doit();
+    alert("ساخت فایل خروجی به اتمام رسید ، پوشه دانلود های خود را ببینید");
 }
 function backExporting() {
     alert("خروجی گرفتن ممکن است کمی طول بکشد ، لطفا صبور باشید ( برای خروجی گرفتن بر روی OK کلیک کنید)");
@@ -435,6 +494,7 @@ function backExporting() {
     pdf.deletePage(pageCount);
     pdf.save("خروجی صفحات پشت.pdf");
     doit();
+    alert("ساخت فایل خروجی به اتمام رسید ، پوشه دانلود های خود را ببینید");
 }
 function dualExporting() {
     alert("خروجی گرفتن ممکن است کمی طول بکشد ، لطفا صبور باشید ( برای خروجی گرفتن بر روی OK کلیک کنید)");
@@ -477,6 +537,8 @@ function dualExporting() {
     pdf.deletePage(pageCount);
     pdf.save("خروجی صفحات یکی درمیان.pdf");
     doit();
+    alert("ساخت فایل خروجی به اتمام رسید ، پوشه دانلود های خود را ببینید");
+
 }
 
 settingInitializer(dd=false);
