@@ -49,10 +49,6 @@
               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">شماره تماس</label>
-              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="0912XXXXXXX"maxlength="11">
-            </div>
-            <div class="mb-3">
               <label for="selectwhat" class="form-label">قسمت</label>
               <select id="selectwhat"class="form-select" aria-label="Default select example">
                 <option selected>پیشنهادات</option>
@@ -65,7 +61,6 @@
               <label for="exampleFormControlTextarea1" class="form-label">متن پیام</label>
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="پیام خود را وارد کنید"></textarea>
             </div>
-            <p style="font-size:10px ;" class="text-center">نشانی ایمیل یا شماره تلفن همراه الزامیست</p>
           </div>
           <div class="modal-footer"dir="ltr">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">خروج</button>
@@ -81,20 +76,19 @@
         
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span>تیز ساز</span>
+        <span>Glimpse</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="">درباره</a></li>
-          <li><a class="nav-link scrollto" href="">آموزش</a></li>
-          <li class="dropdown"><a href="#"><span>توضیحات</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto" href="#about">چیست</a></li>
+          <li><a class="nav-link scrollto" href="#values">چرا </a></li>
+          <li><a class="nav-link scrollto" href="#features">قابلیت ها</a></li>
+          <li class="dropdown"><a href="#"><span>آموزش ها</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">بازی تیزبین</a></li>
-              <li><a href="#">تاریخچه</a></li>
-              <li><a href="#">برنامه نویسی</a></li>
-              <li><a href="#">موارد استفاده</a></li>
-              <li><a href="#">لیست تغییرات نسخه ها</a></li>
+              <li><a href="#">آموزش ساخت کارت ها</a></li>
+              <li><a href="#">بازی کردن با کارت های ساخته شده</a></li>
+              <li><a href="#">توضیحات فنی</a></li>
             </ul>
           </li>
           <li><a class="getstarted scrollto" href="./creator/index.html"dir="rtl" >ورود به محیط ساخت</a></li>
@@ -124,7 +118,7 @@
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+          <img src="assets/img/main.svg" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -141,7 +135,7 @@
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content whatisit">
-              <h3>تیز ساز چیست؟</h3>
+              <h3>Glimpse چیست؟</h3>
               <h2>در این وب اپلیکیشن شما میتوانید کارت های بازی را با اطلاعات خودتان درست کنید!</h2>
               <p>
                 برای اطلاعات بیشتر به بخش اموزش مراجعه کنید
@@ -154,9 +148,9 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-4 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <img src="assets/img/why.svg" class="img-fluid" alt="">
           </div>
 
         </div>
@@ -170,7 +164,7 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h2>چرا تیز ساز؟</h2>
+          <h2>چرا Glimpse</h2>
           <p>مزایای بازی کردن با کارت های ساخته شده</p>
         </header>
 
@@ -178,14 +172,14 @@
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="box val">
-              <img src="assets/img/values-1.png" class="img-fluid" alt="">
-              <h3>بالا بردن سرعت و دقت</h3>
+              <img src="assets/img/havefun.svg" class="img-fluid" alt="">
+              <h3 class="p-5">بالا بردن سرعت و دقت</h3>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
             <div class="box val">
-              <img src="assets/img/values-2.png" class="img-fluid" alt="">
+              <img src="assets/img/learning.svg" class="img-fluid" alt="">
               <h3>یادگیری در حین بازی</h3>
               <p>برای توضیحات بیشتر به بخش آموزش مراجعه کنید</p>
             </div>
@@ -193,8 +187,8 @@
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
             <div class="box val">
-              <img src="assets/img/values-3.png" class="img-fluid" alt="">
-              <h3>سرگرمی</h3>
+              <img src="assets/img/secondselector.svg" class="img-fluid" alt="">
+              <h3 class="p-5">سرگرمی</h3>
             </div>
           </div>
 
@@ -203,74 +197,6 @@
       </div>
 
     </section><!-- End Values Section -->
-   <!-- ======= Pricing Section ======= -->
-   <section id="pricing" class="pricing">
-
-    <div class="container" data-aos="fade-up">
-
-      <header class="section-header">
-        <h2>تهیه لایسنس</h2>
-        <p>مناسب ترین لایسنس را برای خود انتخاب کنید</p>
-      </header>
-
-      <div class="row gy-4" data-aos="fade-left">
-
-        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-          <div class="box">
-            <h3 style="color: #07d5c0;">طرح رایگان</h3>
-            <div class="price"><sup>تومان</sup>0<span> / ماه</span></div>
-            <img src="assets/img/pricing-free.png" class="img-fluid" alt="">
-            <ul>
-              <li>استفاده از تمامی تنظیمات ساخت کارت ها</li>
-              <li>تعداد مراتب ساخت کارت نامحدود</li>
-              <li class="na">خروجی با کیفیت</li>
-              <li class="na">حذف واترمارک</li>
-              <li class="na">ورودی اطلاعات به شکل عکس</li>
-            </ul>
-            <a href="#" class="btn-buy">انتخاب</a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-          <div class="box">
-            <span class="featured">پیشنهاد شده</span>
-            <h3 style="color: #65c600;">طرح مقدماتی</h3>
-            <div class="price"><sup>تومان</sup>20,000<span> / ماه</span></div>
-            <img src="assets/img/pricing-starter.png" class="img-fluid" alt="">
-            <ul>
-              <li>استفاده از تمامی تنظیمات ساخت کارت ها</li>
-              <li>تعداد مراتب ساخت کارت نامحدود</li>
-              <li>خروجی با کیفیت</li>
-              <li>حذف واترمارک</li>
-              <li>ورودی اطلاعات به شکل عکس</li>
-            </ul>
-            <a href="#" class="btn-buy">انتخاب</a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-          <div class="box">
-            <h3 style="color: #ff901c;">طرح پیشرفته</h3>
-            <div class="price"><sup>تومان</sup>50,000<span> / سه ماه</span></div>
-            <img src="assets/img/pricing-business.png" class="img-fluid" alt="">
-            <ul>
-              <li>استفاده از تمامی تنظیمات ساخت کارت ها</li>
-              <li>تعداد مراتب ساخت کارت نامحدود</li>
-              <li>خروجی با کیفیت</li>
-              <li>حذف واترمارک</li>
-              <li>ورودی اطلاعات به شکل عکس</li>
-            </ul>
-            <a href="#" class="btn-buy">انتخاب</a>
-          </div>
-        </div>
-
-
-      </div>
-
-    </div>
-
-  </section><!-- End Pricing Section -->
-
     <!-- ======= Features Section ======= -->
     <section id="features" class="features">
 
@@ -283,10 +209,10 @@
 
         <div class="row">
 
-          <div class="col-lg-6">
-            <img src="assets/img/features.png" class="img-fluid" alt="">
+          <div class="col-lg-4">
+            <img src="assets/img/features.svg" class="img-fluid" alt="">
           </div>
-
+          <div class="col-lg-2"></div>
           <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
             <div class="row align-self-center gy-4">
 
@@ -354,7 +280,7 @@
     <div class="container">
       <div class="credits">
         <p>contact@example.com</p>
-        <p>ساخت و طراحی توسط محمّد موحّدین به پیشنهاد محمّدهادی یزدی زاده</p>
+        <p>ساخت و طراحی توسط محمّد موحّدین به پیشنهاد <a href="https://gorizgroup.landin.ir/intro/" target="_blank">گروه گریز</a></p>
       </div>
       <div class="copyright">
         &copy;All Rights Reserved
